@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar/Navbar";
-import Rectangulos from "./pages/Rectangulos/Rectangulos";
+import Rectangulos from "./pages/Rectangulos";
 import Trapecios from "./pages/Trapecios";
 import Simpson from "./pages/Simpson";
 
