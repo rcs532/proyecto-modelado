@@ -36,7 +36,7 @@ export default function Navbar() {
 					<MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
 						<MDBNavbarItem>
 							<Link to={"Rectangulos"}>
-								<MDBNavbarLink active aria-current="page" href="#">
+								<MDBNavbarLink  aria-current="page" href="#">
 									Metodo de los rectangulos
 								</MDBNavbarLink>
 							</Link>
