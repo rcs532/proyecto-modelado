@@ -1,8 +1,9 @@
+
+import FormTrapecios from "../components/FormTrapecios/FormTrapecios";
+
 function Trapecios() {
 	return (
-		<div>
-			<h1>Trapecios</h1>
-		</div>
+		<FormTrapecios />
 	);
 }
 
