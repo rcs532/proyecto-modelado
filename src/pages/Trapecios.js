@@ -1,10 +1,7 @@
-
 import FormTrapecios from "../components/FormTrapecios/FormTrapecios";
 
 function Trapecios() {
-	return (
-		<FormTrapecios />
-	);
+  return <FormTrapecios />;
 }
 
 export default Trapecios;

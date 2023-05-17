@@ -1,9 +1,7 @@
+import FormSimpson from "../components/FormSimpson/FormSimpson";
+
 function Simpson() {
-	return (
-		<div>
-			<h1>Simpson</h1>
-		</div>
-	);
+  return <FormSimpson />;
 }
 
 export default Simpson;
