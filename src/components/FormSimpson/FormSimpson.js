@@ -8,11 +8,11 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 
-import "./FormRectangle.css";
-import { calcularRectangulos } from "../../util/functions";
-import RectangleGraph from "../RectangleGraph/RectangleGraph";
+import "./FormSimpson.css";
+import { calcularSimpson } from "../../util/functions";
+import SimpsonGraph from "../SimpsonGraph/SimpsonGraph";
 
-export default function FormRectangulos({ onSubmit }) {
+export default function FormSimpson({ onSubmit }) {
   let [func, setFn] = React.useState("");
   let [a, setA] = React.useState(0);
   let [b, setB] = React.useState(0);
@@ -45,7 +45,11 @@ export default function FormRectangulos({ onSubmit }) {
       let value = 0;
       setN(value);
     } else {
-      setN(parseInt(event.target.value));
+      setN(
+        parseInt(event.target.value) % 2 === 0
+          ? parseInt(event.target.value)
+          : parseInt(event.target.value) + 1
+      );
     }
   }
 
@@ -55,7 +59,7 @@ export default function FormRectangulos({ onSubmit }) {
   }
 
   function onSubmit() {
-    let resultado = calcularRectangulos(a, b, n, func);
+    let resultado = calcularSimpson(a, b, n, func);
     setResultado(resultado);
     setSubmitted(true);
   }
@@ -101,7 +105,7 @@ export default function FormRectangulos({ onSubmit }) {
       <MDBTypography tag="h4" className="resultado">
         El area aproximada es {resultado}
       </MDBTypography>
-      {submitted && <RectangleGraph a={a} b={b} n={n} fn={func} />}
+      {submitted && <SimpsonGraph a={a} b={b} n={n} fn={func} />}
     </MDBContainer>
   );
 }
