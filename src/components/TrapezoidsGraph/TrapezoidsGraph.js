@@ -52,7 +52,7 @@ export default function TrapezoidsGraph(props) {
 	const layout = {
 		width: 600,
 		height: 600,
-		title: "Graph of Trapezoids and Function",
+		title: "Grafico",
 		xaxis: {
 			title: "x",
 		},
