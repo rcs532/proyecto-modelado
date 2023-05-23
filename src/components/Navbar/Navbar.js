@@ -11,10 +11,15 @@ import {
 	MDBCollapse,
 } from "mdb-react-ui-kit";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
 	const [showBasic, setShowBasic] = useState(false);
+	const location = useLocation();
+
+	const isActive = (pathname) => {
+		return location.pathname === pathname ? "active" : "";
+	};
 
 	return (
 		<MDBNavbar expand="lg" light bgColor="light">
@@ -36,21 +41,29 @@ export default function Navbar() {
 					<MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
 						<MDBNavbarItem>
 							<Link to={"Rectangulos"}>
-								<MDBNavbarLink  aria-current="page" href="#">
+								<MDBNavbarLink
+									className={isActive("/Rectangulos")}
+								>
 									Metodo de los rectangulos
 								</MDBNavbarLink>
 							</Link>
 						</MDBNavbarItem>
-						<Link to={"Trapecios"}>
-							<MDBNavbarItem>
-								<MDBNavbarLink href="#">Metodo de los trapezoides</MDBNavbarLink>
-							</MDBNavbarItem>
-						</Link>
-						<Link to={"Simpson"}>
-							<MDBNavbarItem>
-								<MDBNavbarLink href="#">Metodo de Simpson</MDBNavbarLink>
-							</MDBNavbarItem>
-						</Link>
+						<MDBNavbarItem>
+							<Link to={"Trapecios"}>
+								<MDBNavbarLink
+									className={isActive("/Trapecios")}
+								>
+									Metodo de los trapezoides
+								</MDBNavbarLink>
+							</Link>
+						</MDBNavbarItem>
+						<MDBNavbarItem>
+							<Link to={"Simpson"}>
+								<MDBNavbarLink className={isActive("/Simpson")}>
+									Metodo de Simpson
+								</MDBNavbarLink>
+							</Link>
+						</MDBNavbarItem>
 					</MDBNavbarNav>
 				</MDBCollapse>
 			</MDBContainer>
