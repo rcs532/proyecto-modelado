@@ -1,54 +1,65 @@
-import React, { useEffect, useMemo } from 'react';
-import Plot from 'react-plotly.js';
+import React from "react";
+import Plot from "react-plotly.js";
 
-export default function TrapezoidsGraph({ a, b, n, f }) {
-  const x = useMemo(() => {
-    const xValues = [];
-    for (let i = 0; i <= n; i++) {
-      xValues.push(a + (b - a) * i / n);
-    }
-    return xValues;
-  }, [a, b, n]);
+export default function TrapezoidsGraph(props) {
+	const xValues = [];
+	const yValues = [];
+	const dx = (props.b - props.a) / props.n;
 
-  const y = useMemo(() => {
-    return x.map((xi) => {
-      const expr = f.replace(/x/g, xi);
-      return eval(expr);
-    });
-  }, [x, f]);
+	for (let i = 0; i < props.n; i++) {
+		const xi = props.a + i * dx;
+		const xi_1 = xi + dx;
+		const yi = eval(props.f.replace(/x/g, xi));
+		const yi_1 = eval(props.f.replace(/x/g, xi_1));
 
-  let area = 0;
-  const trapezoidTraces = [];
-  for (let i = 1; i <= n; i++) {
-    const xi = x[i];
-    const xi_1 = x[i-1];
-    const yi = y[i];
-    const yi_1 = y[i-1];
-    const trace = {
-      x: [xi_1, xi, xi, xi_1],
-      y: [0, 0, yi, yi_1],
-      type: 'scatter',
-      mode: 'lines',
-      name: 'Trapezoids',
-      line: { width: 1 },
-      fill: 'tozeroy'
-    };
-    trapezoidTraces.push(trace);
-    area += (yi_1 + yi) * (xi - xi_1) / 2;
-  }
+		xValues.push(xi, xi_1, xi_1, xi, xi);
+		yValues.push(0, 0, yi_1, yi, 0);
+	}
 
-  const functionTrace = {
-    x: x,
-    y: y,
-    type: 'scatter',
-    mode: 'lines',
-    name: 'Function'
-  };
+	const curveXValues = [];
+	const curveYValues = [];
 
-  const data = [functionTrace, ...trapezoidTraces];
-  const layout = { title: `Grafico de trapecios y funcion` };
+	for (let x = props.a; x <= props.b; x += 0.01) {
+		curveXValues.push(x);
+		curveYValues.push(eval(props.f.replace(/x/g, x)));
+	}
 
-  return <Plot data={data} layout={layout} />;
+	const trapezoidTrace = {
+		x: xValues,
+		y: yValues,
+		type: "scatter",
+		mode: "lines",
+		fill: "tozeroy",
+		line: {
+			color: "blue",
+		},
+		name: "Trapezoids",
+	};
+
+	const functionTrace = {
+		x: curveXValues,
+		y: curveYValues,
+		type: "scatter",
+		mode: "lines",
+		line: {
+			color: "red",
+		},
+		name: "Function",
+	};
+
+	const data = [trapezoidTrace, functionTrace];
+
+	const layout = {
+		width: 600,
+		height: 600,
+		title: "Graph of Trapezoids and Function",
+		xaxis: {
+			title: "x",
+		},
+		yaxis: {
+			title: "f(x)",
+		},
+	};
+
+	return <Plot data={data} layout={layout} />;
 }
-
-
